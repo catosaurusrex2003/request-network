@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 import CardTable from "components/Cards/CardTable.js";
 import CardSettings from "components/Cards/CardSettings";
+import EmailEditor from "components/Cards/EmailEditor";
 
 export default function Tables() {
   // status : pending , completed , delayed
@@ -41,32 +42,38 @@ export default function Tables() {
 
   return (
     <>
-      <div className="flex flex-wrap mt-4">
+      <div className="flex flex-col flex-wrap mt-4">
         <CardTable recipientList={recipientList} setRecipientList={setRecipientList} />
         {pageMode == "addingUser" && <CardSettings recipientList={recipientList} setRecipientList={setRecipientList} />}
-        <button
-          className={`${pageMode === "addingUser"
-              ? "opacity-25 bg-lightBlue-500 cursor-not-allowed"
-              : "bg-lightBlue-500 active:bg-lightBlue-600"
-            } text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150`}
-          type="button"
-          onClick={goPageBackward}
-          disabled={pageMode === "addingUser"}
-        >
-          Previous Section
-        </button>
+        {pageMode == "writingEmail" && <EmailEditor recipientList={recipientList} setRecipientList={setRecipientList} />}
 
-        <button
-          className={`${pageMode === "writingEmail"
+
+        <div className="flex ">
+          <button
+            className={`${pageMode === "addingUser"
               ? "opacity-25 bg-lightBlue-500 cursor-not-allowed"
               : "bg-lightBlue-500 active:bg-lightBlue-600"
-            } text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150`}
-          type="button"
-          onClick={goPageForward}
-          disabled={pageMode === "writingEmail"}
-        >
-          Next Section
-        </button>
+              } text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150`}
+            type="button"
+            onClick={goPageBackward}
+            disabled={pageMode === "addingUser"}
+          >
+            Previous Section
+          </button>
+
+          <button
+            className={`${pageMode === "writingEmail"
+              ? "opacity-25 bg-lightBlue-500 cursor-not-allowed"
+              : "bg-lightBlue-500 active:bg-lightBlue-600"
+              } text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150`}
+            type="button"
+            onClick={goPageForward}
+            disabled={pageMode === "writingEmail"}
+          >
+            Next Section
+          </button>
+
+        </div>
 
       </div>
     </>
