@@ -1381,6 +1381,10 @@ select {
   cursor: pointer;
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
 .block {
   display: block;
 }
@@ -1896,6 +1900,10 @@ select {
 
 .min-w-140-px {
   min-width: 140px;
+}
+
+.opacity-25 {
+  opacity: 0.25;
 }
 
 .opacity-50 {
