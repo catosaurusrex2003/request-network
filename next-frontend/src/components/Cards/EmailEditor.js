@@ -1,13 +1,13 @@
 'use client'
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic'
-
-// import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import 'react-quill-new/dist/quill.snow.css';
+// DOnt use react-quill
+// it is incompatible with newer version fo recat
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 const EmailEditor = ({ recipientList }) => {
-    const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-    const [content, setContent] = useState('Hello $name, This is your email content.');
+    const [content, setContent] = useState('Use variables like this $name and draft a confirmation email for reciepent');
 
     const variables = recipientList[0]
 
@@ -27,12 +27,17 @@ const EmailEditor = ({ recipientList }) => {
 
     const availableVars = getAvailableVariables(variables);
 
-
-
     return (
         <div className='flex flex-col mb-5'>
+            <h3
+                className={
+                    "font-semibold text-lg text-blueGray-700 mb-5"
+                }
+            >
+                Draft Confirmation Email 
+            </h3>
             <div className=" text-sm mb-2">
-                <span className='font-bold'>Available Variables: </span>
+                <span className='font-semibold text-blueGray-700'>Available Variables: </span>
                 {availableVars.map(variable => (
                     <span onClick={() => { setContent((prev) => `${prev} ${variable}`) }} key={variable} className="ml-2 bg-gray-500 py-1 px-2 rounded text-white cursor-pointer">
                         {variable}
@@ -49,7 +54,7 @@ const EmailEditor = ({ recipientList }) => {
                 className='bg-white'
             />
             <div className='mt-5'>
-                <h3 className=' font-bold'>Final Content:</h3>
+                <span className='text-sm font-semibold text-blueGray-700'>Email Preview:</span>
             </div>
             <div className='mt-1' dangerouslySetInnerHTML={{ __html: getProcessedContent() }} />
         </div>
