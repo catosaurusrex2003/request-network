@@ -87,7 +87,7 @@ export default function CardSettings({ recipientList, setRecipientList }) {
         <div className="text-center flex justify-between items-center">
           <h6 className="text-blueGray-700 text-xl font-bold">Add Recipient</h6>
           {/* Yaar ye button pe tailwind  classes chalti kyun nahi hai  ? */}
-          <div className="flex items-center space-x-2">
+          <div className="flex  justify-between space-x-4">
             <input
               type="file"
               accept=".csv"
