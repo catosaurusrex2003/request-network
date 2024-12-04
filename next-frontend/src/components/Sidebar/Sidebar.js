@@ -2,7 +2,6 @@
 /*eslint-disable*/
 import React, { useState } from "react";
 
-
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "@/components/Dropdowns/UserDropdown.js";
 import Link from "next/link";
@@ -12,7 +11,7 @@ export default function Sidebar() {
   const [collapseShow, setCollapseShow] = useState("hidden");
   const [activeItem, setActiveItem] = useState("dashboard"); // New state for active item
 
-  const pathname = usePathname()
+  const pathname = usePathname();
   return (
     <>
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -94,24 +93,6 @@ export default function Sidebar() {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (activeItem === "dashboard"
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  href="/dashboard"
-                  onClick={() => setActiveItem("dashboard")}
-                >
-                  <i className={
-                    "fas fa-tv mr-2 text-sm " +
-                    (activeItem === "dashboard" ? "opacity-75" : "text-blueGray-300")
-                  }></i>
-                  Dashboard
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
                     (activeItem === "tables"
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
@@ -119,11 +100,37 @@ export default function Sidebar() {
                   href="/"
                   onClick={() => setActiveItem("tables")}
                 >
-                  <i className={
-                    "fas fa-table mr-2 text-sm " +
-                    (activeItem === "tables" ? "opacity-75" : "text-blueGray-300")
-                  }></i>
+                  <i
+                    className={
+                      "fas fa-table mr-2 text-sm " +
+                      (activeItem === "tables"
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>
                   Disbursement
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (activeItem === "dashboard"
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  href="/dashboard"
+                  onClick={() => setActiveItem("dashboard")}
+                >
+                  <i
+                    className={
+                      "fas fa-tv mr-2 text-sm " +
+                      (activeItem === "dashboard"
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>
+                  Dashboard
                 </Link>
               </li>
               {/* <li className="items-center">
@@ -175,8 +182,6 @@ export default function Sidebar() {
                 </Link>
               </li>
             </ul>
-
-
           </div>
         </div>
       </nav>

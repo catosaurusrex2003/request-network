@@ -30,16 +30,16 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Web3Provider>
-        <Sidebar />
-        <div className="relative md:ml-64 bg-blueGray-100">
-          <AdminNavbar />
-          {/* Header */}
-          <HeaderStats />
-          <div className="px-4 md:px-10 mx-auto w-full -m-24">
-            {children}
-            <FooterAdmin />
+          <Sidebar />
+          <div className="relative md:ml-64 bg-blueGray-100">
+            <AdminNavbar />
+            {/* Header */}
+            <HeaderStats />
+            <div className="px-4 md:px-10 mx-auto w-full -m-24">
+              {children}
+              <FooterAdmin />
+            </div>
           </div>
-        </div>
         </Web3Provider>
       </body>
     </html>
