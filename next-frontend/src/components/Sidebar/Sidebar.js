@@ -1,18 +1,36 @@
 "use client";
 /*eslint-disable*/
-import React, { useState } from "react";
-
-
+import React, { useEffect, useState } from "react";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "@/components/Dropdowns/UserDropdown.js";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import { app } from "@/config/firebase";
+import { useAuthStore } from "@/store/auth";
 
 export default function Sidebar() {
+  const auth = getAuth(app);
+  const isLoggedIn = useAuthStore((state) => state.isUserValid)
+  const setIsUserValid = useAuthStore((state) => state.setIsUserValid)
   const [collapseShow, setCollapseShow] = useState("hidden");
-  const [activeItem, setActiveItem] = useState("dashboard"); // New state for active item
+  const pathname = usePathname(); // Get current pathname
 
-  const pathname = usePathname()
+  const signOutUser = async () => {
+    try {
+      await signOut(auth);
+      setIsUserValid(false);
+    } catch (error) {
+      console.error("Error signing out:", error.message);
+      // Optionally add user notification here
+    }
+  };
+
+  const isRouteActive = (route) => {
+    return pathname === route;
+  };
+
+
   return (
     <>
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -76,105 +94,81 @@ export default function Sidebar() {
                 <input
                   type="text"
                   placeholder="Search"
-                  className="border-0 px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
+                  className="px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
                 />
               </div>
             </form>
 
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            {/* <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Admin Layout Pages
-            </h6> */}
-            {/* Navigation */}
+
+
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (activeItem === "dashboard"
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  href="/dashboard"
-                  onClick={() => setActiveItem("dashboard")}
-                >
-                  <i className={
-                    "fas fa-tv mr-2 text-sm " +
-                    (activeItem === "dashboard" ? "opacity-75" : "text-blueGray-300")
-                  }></i>
-                  Dashboard
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (activeItem === "tables"
+                    (isRouteActive("/")
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
                   href="/"
-                  onClick={() => setActiveItem("tables")}
                 >
                   <i className={
                     "fas fa-table mr-2 text-sm " +
-                    (activeItem === "tables" ? "opacity-75" : "text-blueGray-300")
+                    (isRouteActive("/") ? "opacity-75" : "text-blueGray-300")
                   }></i>
                   Disbursement
                 </Link>
               </li>
-              {/* <li className="items-center">
+              <li className="items-center">
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (activeItem === "settings"
+                    (isRouteActive("/dashboard")
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
-                  href="/settings"
-                  onClick={() => setActiveItem("settings")}
+                  href="/dashboard"
                 >
                   <i className={
-                    "fas fa-tools mr-2 text-sm " +
-                    (activeItem === "settings" ? "opacity-75" : "text-blueGray-300")
+                    "fas fa-tv mr-2 text-sm " +
+                    (isRouteActive("/dashboard") ? "opacity-75" : "text-blueGray-300")
                   }></i>
-                  Settings
+                  Dashboard
                 </Link>
-              </li> */}
+              </li>
             </ul>
 
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            {/* <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Auth Layout Pages
-            </h6> */}
-            {/* Navigation */}
 
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+
+            {!isLoggedIn && <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  href="/auth/login"
+                  href="/login"
                 >
                   <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
                   Login
                 </Link>
               </li>
+            </ul>}
 
+            {isLoggedIn && <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
-                <Link
+                <button
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  href="/auth/register"
+                  href="/login"
+                  onClick={signOutUser}
                 >
-                  <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>{" "}
-                  Register
-                </Link>
+                  <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  Logout
+                </button>
               </li>
-            </ul>
+            </ul>}
 
 
           </div>
