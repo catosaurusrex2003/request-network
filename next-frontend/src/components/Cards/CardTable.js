@@ -36,7 +36,7 @@ export default function CardTable({ color = "light", recipientList, setRecipient
                   (color === "light" ? "text-blueGray-700" : "text-white")
                 }
               >
-                Card Tables
+                Recipients
               </h3>
             </div>
           </div>
