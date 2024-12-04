@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-
+import AdminNavbar from "@/components/Navbars/AdminNavbar";
+import HeaderStats from "@/components/Headers/HeaderStats";
 // components
 
 import CardTable from "@/components/Cards/CardTable.js";
@@ -43,6 +44,8 @@ export default function Tables() {
 
   return (
     <>
+      <AdminNavbar />
+      <HeaderStats />
       <div className="flex flex-col flex-wrap mt-4">
         <CardTable recipientList={recipientList} setRecipientList={setRecipientList} />
         {pageMode == "addingUser" && <CardSettings recipientList={recipientList} setRecipientList={setRecipientList} />}
