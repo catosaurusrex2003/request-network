@@ -2,7 +2,7 @@
 import React from "react";
 
 import UserDropdown from "@/components/Dropdowns/UserDropdown.js";
-
+import { WalletConnectButton } from "@/components/Navbars/WalletConnectButton";
 export default function Navbar() {
   return (
     <>
@@ -30,6 +30,7 @@ export default function Navbar() {
               />
             </div>
           </form>
+          <WalletConnectButton />
           {/* User */}
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
             <UserDropdown />

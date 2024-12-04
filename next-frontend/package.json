@@ -11,9 +11,17 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.1",
     "@popperjs/core": "^2.11.8",
+    "@tanstack/react-query": "^5.62.2",
+    "@wagmi/chains": "^1.8.0",
+    "@wagmi/core": "^2.15.2",
+    "@web3modal/wagmi": "^4.2.3",
     "next": "15.0.3",
+    "papaparse": "^5.4.1",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "react-quill": "^2.0.0",
+    "viem": "^2.21.53",
+    "wagmi": "^2.13.3"
   },
   "devDependencies": {
     "eslint": "^8",

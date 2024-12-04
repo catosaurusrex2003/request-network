@@ -4,6 +4,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import AdminNavbar from "@/components/Navbars/AdminNavbar";
 import HeaderStats from "@/components/Headers/HeaderStats";
 import FooterAdmin from "@/components/Footers/FooterAdmin";
+import { Web3Provider } from "@/components/Navbars/Web3Provider";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const geistSans = localFont({
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Web3Provider>
         <Sidebar />
         <div className="relative md:ml-64 bg-blueGray-100">
           <AdminNavbar />
@@ -38,6 +40,7 @@ export default function RootLayout({ children }) {
             <FooterAdmin />
           </div>
         </div>
+        </Web3Provider>
       </body>
     </html>
   );

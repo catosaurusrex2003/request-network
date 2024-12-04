@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic'
 
 // import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+// import 'react-quill/dist/quill.snow.css';
 
 const EmailEditor = ({ recipientList }) => {
     const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
