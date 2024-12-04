@@ -87,7 +87,7 @@ export default function CardSettings({ recipientList, setRecipientList }) {
     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
       <div className="rounded-t bg-white mb-0 px-6 py-6">
         <div className="text-center flex justify-between">
-          <h6 className="text-blueGray-700 text-xl font-bold">Add Recipient</h6>
+          <h6 className="text-blueGray-700 text-lg font-bold">Add Recipient</h6>
           <div className="flex  justify-between space-x-4">
             <input
               type="file"
