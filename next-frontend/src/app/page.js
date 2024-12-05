@@ -12,8 +12,8 @@ export default function Tables() {
   // status : pending , completed , delayed
   const [recipientList, setRecipientList] = useState([
     {
-      name: "Mohammed Mehdi",
-      email: "mohdmehdi2003@gmail.com",
+      name: "Bhavik Punmiya",
+      email: "Bhavikpunmiya03@gmail.com",
       wallet_addr: "0x07126127C6e1039b60496aF2e14e7b5515A40e40",
       team_name: "Random_state_42",
       ammount: 7500,
@@ -46,7 +46,7 @@ export default function Tables() {
     <>
       <AdminNavbar />
       <HeaderStats />
-      <div className="flex flex-col flex-wrap mt-4">
+      <div className="flex flex-col flex-wrap mt-4 px-8">
         <CardTable recipientList={recipientList} setRecipientList={setRecipientList} />
         {pageMode == "addingUser" && <CardSettings recipientList={recipientList} setRecipientList={setRecipientList} />}
         {pageMode == "writingEmail" && <EmailEditor recipientList={recipientList} setRecipientList={setRecipientList} />}
