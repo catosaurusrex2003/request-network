@@ -1,24 +1,27 @@
-'use client'
+"use client";
 import React from "react";
 import PropTypes from "prop-types";
 
 // components
 
-import TableDropdown from "@/components/Dropdowns/TableDropdown.js";
+import TableDropdown from "../components/Dropdowns/TableDropdown.js";
 
-export default function CardTable({ color = "light", recipientList, setRecipientList }) {
-
+export default function CardTable({
+  color = "light",
+  recipientList,
+  setRecipientList,
+}) {
   const getStatusColor = (status) => {
     // pending , completed , delayed
     switch (status) {
       case "pending":
-        return "text-orange-500"
+        return "text-orange-500";
       case "completed":
-        return "text-emerald-500"
+        return "text-emerald-500";
       case "delayed":
-        return "text-red-500"
+        return "text-red-500";
     }
-  }
+  };
   return (
     <>
       <div
@@ -274,7 +277,7 @@ export default function CardTable({ color = "light", recipientList, setRecipient
                   <TableDropdown />
                 </td>
               </tr> */}
-              {recipientList.map((each, index) =>
+              {recipientList.map((each, index) => (
                 <tr key={`row-${index}`}>
                   {/* <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                     <img
@@ -313,7 +316,12 @@ export default function CardTable({ color = "light", recipientList, setRecipient
                     {each.city}
                   </td>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    <i className={`fas fa-circle mr-2 ${getStatusColor(each.status)}`}></i> {each.status}
+                    <i
+                      className={`fas fa-circle mr-2 ${getStatusColor(
+                        each.status
+                      )}`}
+                    ></i>{" "}
+                    {each.status}
                   </td>
                   {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <div className="flex items-center">
@@ -331,8 +339,8 @@ export default function CardTable({ color = "light", recipientList, setRecipient
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                     <TableDropdown />
                   </td>
-                </tr>)}
-
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

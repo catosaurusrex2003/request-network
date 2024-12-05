@@ -2,8 +2,8 @@
 /*eslint-disable*/
 import React, { useEffect, useState } from "react";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.js";
-import UserDropdown from "@/components/Dropdowns/UserDropdown.js";
+import NotificationDropdown from "../components/Dropdowns/NotificationDropdown.js";
+import UserDropdown from "../components/Dropdowns/UserDropdown.js";
 import Link from "next/link";
 import { redirect, usePathname } from "next/navigation";
 import { app } from "@/config/firebase";
@@ -11,8 +11,8 @@ import { useAuthStore } from "@/store/auth";
 
 export default function Sidebar() {
   const auth = getAuth(app);
-  const isLoggedIn = useAuthStore((state) => state.isUserValid)
-  const setIsUserValid = useAuthStore((state) => state.setIsUserValid)
+  const isLoggedIn = useAuthStore((state) => state.isUserValid);
+  const setIsUserValid = useAuthStore((state) => state.setIsUserValid);
   const [collapseShow, setCollapseShow] = useState("hidden");
   const pathname = usePathname(); // Get current pathname
 
@@ -29,7 +29,6 @@ export default function Sidebar() {
   const isRouteActive = (route) => {
     return pathname === route;
   };
-
 
   return (
     <>
@@ -102,8 +101,6 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
 
-
-
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
                 <Link
@@ -115,10 +112,12 @@ export default function Sidebar() {
                   }
                   href="/"
                 >
-                  <i className={
-                    "fas fa-table mr-2 text-sm " +
-                    (isRouteActive("/") ? "opacity-75" : "text-blueGray-300")
-                  }></i>
+                  <i
+                    className={
+                      "fas fa-table mr-2 text-sm " +
+                      (isRouteActive("/") ? "opacity-75" : "text-blueGray-300")
+                    }
+                  ></i>
                   Disbursement
                 </Link>
               </li>
@@ -132,10 +131,14 @@ export default function Sidebar() {
                   }
                   href="/dashboard"
                 >
-                  <i className={
-                    "fas fa-tv mr-2 text-sm " +
-                    (isRouteActive("/dashboard") ? "opacity-75" : "text-blueGray-300")
-                  }></i>
+                  <i
+                    className={
+                      "fas fa-tv mr-2 text-sm " +
+                      (isRouteActive("/dashboard")
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>
                   Dashboard
                 </Link>
               </li>
@@ -144,33 +147,34 @@ export default function Sidebar() {
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
 
+            {!isLoggedIn && (
+              <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+                <li className="items-center">
+                  <Link
+                    className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                    href="/login"
+                  >
+                    <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
+                    Login
+                  </Link>
+                </li>
+              </ul>
+            )}
 
-            {!isLoggedIn && <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-              <li className="items-center">
-                <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  href="/login"
-                >
-                  <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
-                  Login
-                </Link>
-              </li>
-            </ul>}
-
-            {isLoggedIn && <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-              <li className="items-center">
-                <button
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  href="/login"
-                  onClick={signOutUser}
-                >
-                  <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
-                  Logout
-                </button>
-              </li>
-            </ul>}
-
-
+            {isLoggedIn && (
+              <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+                <li className="items-center">
+                  <button
+                    className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                    href="/login"
+                    onClick={signOutUser}
+                  >
+                    <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </nav>

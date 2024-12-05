@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 
-import UserDropdown from "@/components/Dropdowns/UserDropdown.js";
-import { WalletConnectButton } from "@/components/Navbars/WalletConnectButton";
+import UserDropdown from "../components/Dropdowns/UserDropdown.js";
+import { WalletConnectButton } from "../components/Navbars/WalletConnectButton";
 export default function Navbar() {
   return (
     <>

@@ -1,11 +1,11 @@
-'use client'
+"use client";
 /*eslint-disable*/
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 // components
 
-import PagesDropdown from "@/components/Dropdowns/PagesDropdown.js";
+import PagesDropdown from "../components/Dropdowns/PagesDropdown.js";
 
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -37,9 +37,7 @@ export default function Navbar(props) {
           >
             <ul className="flex flex-col lg:flex-row list-none mr-auto">
               <li className="flex items-center">
-                <a
-                  className="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                >
+                <a className="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold">
                   <i className="lg:text-blueGray-200 text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2" />{" "}
                   Docs
                 </a>
